@@ -10,8 +10,11 @@
 <body>
     <h2>Hello,{{ $data['name'] }}</h2>
     <p>Your Leave Request Status is {{ $data['status'] }}</p>
+    @if (isset($data['comments']))
+        <p>Comment: {{ $data['comments'] }}</p>
+    @endif
 
-    <p>Commnent:--{{ $data['comments'] }}</p>
+
 
 
     <p>Dear,</p>

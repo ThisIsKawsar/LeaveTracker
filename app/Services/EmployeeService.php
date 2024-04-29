@@ -38,8 +38,8 @@ class EmployeeService
             'status'                        => $request->status,
           ]);
 
-       
-            UserCredential::updateOrCreate([
+
+           $u= UserCredential::updateOrCreate([
                 'id'                  => $request->userc_id,
             ],[
                     'user_id'         => $user->id,

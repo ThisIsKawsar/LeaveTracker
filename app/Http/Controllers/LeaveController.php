@@ -68,7 +68,7 @@ class LeaveController extends Controller
             });
 
 
-            return redirect()->route('leaves.index')->with('message', 'Leave Created Successfully!');
+            return redirect()->route('leaves.index')->with('message', 'Leave Created Successfully & Status Sent To Mail!');
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', $e->getMessage());
@@ -116,7 +116,7 @@ class LeaveController extends Controller
             });
 
 
-            return redirect()->route('leaves.index')->with('message', 'Leave Updated Successfully!');
+            return redirect()->route('leaves.index')->with('message', 'Leave Updated Successfully & Status Sent To Mail!');
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', $e->getMessage());

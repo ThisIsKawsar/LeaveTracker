@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class EmployeeManagmentController extends Controller
      */
     public function index()
     {
-        
+
 
             $data['users']      = User::query()->where('is_admin',"0")
                                             ->when(request('name'), function ($q, $name) {
@@ -36,11 +36,11 @@ class EmployeeManagmentController extends Controller
                                                 $q->where('email', $email);
                                             })
 
-                                    
+
                                             ->latest()
                                             ->get();
             return view('admin.employee.index', $data);
-        
+
     }
 
     /**
@@ -86,7 +86,7 @@ class EmployeeManagmentController extends Controller
      */
     public function show($id)
     {
-   
+
     }
 
     /**
@@ -153,9 +153,8 @@ class EmployeeManagmentController extends Controller
 
     }
      public function employee(){
-        
-            $users =Auth::user()->name;
-            
-            return view('employee.home',compact('users'));
+
+
+            return view('employee.home');
         }
 }

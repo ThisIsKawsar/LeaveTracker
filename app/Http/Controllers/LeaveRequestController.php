@@ -134,13 +134,7 @@ class LeaveRequestController extends Controller
         }
 
     }
-    public function totalEmployee()
-    {
-       
-        $count = User::count(); 
-        return response()->json(['count' => $count]);
-
-    }
+ 
 
 
 }

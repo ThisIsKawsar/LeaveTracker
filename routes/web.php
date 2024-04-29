@@ -19,25 +19,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('leaves', App\Http\Controllers\LeaveController::class)->middleware('auth');
+Route::resource('leaves', App\Http\Controllers\LeaveController::class)->middleware(['auth','status']);
 Route::get('/home',     [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/employee', [App\Http\Controllers\EmployeeManagmentController::class, 'employee'])->middleware('auth');
 
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    
+
     Route::resource('leave-requests',    App\Http\Controllers\LeaveRequestController::class);
     Route::resource('employee-manege',   App\Http\Controllers\EmployeeManagmentController::class);
 
 
-
-    Route::get('total/employee', [App\Http\Controllers\LeaveRequestController::class, 'totalEmployee'])->name('totalEmployee');
-    
- 
 });
 
 
-    
 
-   
+
+
 

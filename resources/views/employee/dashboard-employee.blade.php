@@ -48,25 +48,27 @@
                     <i class="fas fa-fw fa-home"></i>
                     <span>Homepage</span></a>
             </li>
+            @if (Auth::user()->status == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('leaves.index') }}">
+                        <i class="fas fa-fw fa-calculator"></i>
+                        <span>My Leaves </span></a>
+
+                </li>
+            @endif
+
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('leaves.index') }}">
-                    <i class="fas fa-fw fa-calculator"></i>
-                    <span>My Leaves </span></a>
-
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}" 
-                onclick="event.preventDefault();
+                <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
                    document.getElementById('logout-form').submit();">
                     <i class="fas fa-fw fa-power-off"></i>
                     <span>Logout</span></a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                     </form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
-        
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Models\Leave;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 class LeaveService
 {
@@ -20,7 +22,7 @@ class LeaveService
     public function updateOrCreateData($request)
     {
 
-        Leave::updateOrCreate(
+        $leave  =  Leave::updateOrCreate(
             [
                 'id'                              => $request->leave_id,
             ],[
@@ -34,6 +36,15 @@ class LeaveService
 
 
         ]);
+
+        $email            = $leave->user->email;
+        $data['name']     = $leave->user->name;
+        // $data['comments'] = $request->comments;
+         $data['status']   = $request->status;
+
+
+
+       Mail::to($email)->send(new SendMail($data));
     }
 
 

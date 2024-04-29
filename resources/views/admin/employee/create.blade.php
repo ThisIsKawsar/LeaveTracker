@@ -36,14 +36,7 @@
 
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="description" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-8">
-
-                        <input type="text" name="username" class="form-control" placeholder="Username" required>
-
-                    </div>
-                </div>
+          
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label">DOB</label>
                     <div class="col-sm-8">

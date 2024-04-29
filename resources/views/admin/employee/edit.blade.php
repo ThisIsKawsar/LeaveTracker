@@ -27,7 +27,7 @@
                 @method('PUT')
                 <input type="hidden" name="user_id" class="form-control" value="{{ @$user->id }}">
                 <input type="hidden" name="userc_id" class="form-control" value="{{@$user->credential->id}}">
-                
+
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-8">
@@ -37,7 +37,7 @@
 
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label">DOB</label>
                     <div class="col-sm-8">
