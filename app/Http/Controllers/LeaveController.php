@@ -30,6 +30,7 @@ class LeaveController extends Controller
         {
 
             $data['leaveData']      = Leave::query()
+                                            ->where('user_id', auth()->id())
                                             ->when(request('status'), function ($q, $status) {
                                                 $q->where('approval_status', $status);
                                             })

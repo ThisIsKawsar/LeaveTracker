@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="btn-group"style="margin-top: 30px;">
+                        <div class="btn-group"style="margin-top: 5px;">
                             <button class="btn btn-sm btn-primary">
                                 <i class="fa fa-search"></i> SEARCH
                             </button>
@@ -83,7 +83,9 @@
                             <td><a class="btn btn-primary" href="{{ route('employee-manege.edit', $data->id) }}">Edit</a>
                                 <!-- <a class="btn btn-danger "
                                     href="{{ route('employee-manege.destroy', $data->id) }}">Delete</a> -->
-                                    <a class="btn btn-danger" href="{{ route('employee-manege.destroy', $data->id) }}">Delete</a>
+                                    <!-- <a class="btn btn-danger" href="{{ route('employee-manege.destroy', $data->id) }}">Delete</a> -->
+                                    <a href="#" onclick="delete_item('{{ route('employee-manege.destroy', $data->id) }}')"
+                                        class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @empty
@@ -100,5 +102,25 @@
         </div>
     </div>
 
-    <script></script>
+
 @endsection
+<script>
+    function delete_item(url) {
+        Swal.fire({
+            title: 'Are you sure ?',
+            html: "<div style='margin: 10px 0'><b>You will delete this record permanently !</b></div>",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            width: 400,
+        }).then((result) => {
+            if (result.value) {
+                // $('deleteItemForm').attr({'action': url});
+                $('#deleteItemForm').attr('action', url).submit();
+            }
+        })
+
+    }
+</script>

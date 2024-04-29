@@ -99,14 +99,14 @@
                                     @if (@$value->approval_status != 'Pending')
                                         <a href="#Comments{{ $value->id }}"data-toggle="modal" title="Commnets"
                                             class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                                    @endif
+                                    @else
                                     <a href="{{ route('leaves.edit', $value->id) }}"title="Edit"
                                         class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 
-
-
-                                    <a href="#" onclick="delete_item('{{ route('leaves.destroy', $value->id) }}')"
+                                   <a href="#" onclick="delete_item('{{ route('leaves.destroy', $value->id) }}')"
                                         class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                    @endif
+                                 
 
 
                                 </div>
@@ -160,3 +160,23 @@
         </div>
     @endforeach
 @endsection
+<script>
+    function delete_item(url) {
+        Swal.fire({
+            title: 'Are you sure ?',
+            html: "<div style='margin: 10px 0'><b>You will delete this record permanently !</b></div>",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            width: 400,
+        }).then((result) => {
+            if (result.value) {
+                // $('deleteItemForm').attr({'action': url});
+                $('#deleteItemForm').attr('action', url).submit();
+            }
+        })
+
+    }
+</script>

@@ -26,7 +26,8 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="user_id" class="form-control" value="{{ @$user->id }}">
-      
+                <input type="hidden" name="userc_id" class="form-control" value="{{@$user->credential->id}}">
+                
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-8">
@@ -42,7 +43,7 @@
                     <div class="col-sm-8">
 
                         <input type="date" class="form-control" id="date_of_birth"
-                            name="date_of_birth"value="{{ @$user->employee->dob }}" required>
+                            name="date_of_birth"value="{{ @$user->dob }}" required>
 
                     </div>
                 </div>
@@ -60,7 +61,7 @@
                     <div class="col-sm-8">
 
                         <input type="number" class="form-control" id="number"
-                            name="number"value="{{ @$user->employee->phone_number }}" placeholder="Phone Number" required>
+                            name="number"value="{{ @$user->phone_number }}" placeholder="Phone Number" required>
 
                     </div>
                 </div>
@@ -68,7 +69,7 @@
                     <label for="description" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-8">
                         <input type="password" class="form-control" id="password"
-                            name="password"value="{{ @$user->password }}" required>
+                            name="password"value="{{ @$user->credential->secrete }}" required>
 
 
                     </div>

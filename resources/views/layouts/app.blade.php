@@ -79,6 +79,6 @@
             @yield('content')
         </main>
     </div>
-    @include('admin.modal')
+  
 </body>
 </html>

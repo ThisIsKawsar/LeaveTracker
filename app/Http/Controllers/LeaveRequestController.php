@@ -126,7 +126,7 @@ class LeaveRequestController extends Controller
             });
 
 
-            return redirect()->route('leaves.index')->with('message', 'Leave Deleted Successfully!');
+            return redirect()->route('leave-requests.index')->with('message', 'Leave Deleted Successfully!');
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', $e->getMessage());

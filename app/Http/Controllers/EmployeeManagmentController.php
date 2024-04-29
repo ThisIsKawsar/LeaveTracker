@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User; 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use App\Services\EmployeeService;
 class EmployeeManagmentController extends Controller
 {
@@ -118,7 +119,7 @@ class EmployeeManagmentController extends Controller
             });
 
 
-            return redirect()->route('employee-maneges.index')->with('message', 'Employee Updated Successfully!');
+            return redirect()->route('employee-manege.index')->with('message', 'Employee Updated Successfully!');
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', $e->getMessage());
@@ -139,6 +140,7 @@ class EmployeeManagmentController extends Controller
             DB::transaction(function () use ($id) {
 
                 $user=User::find($id);
+                $user->credential()->delete();
                 $user->delete();
             });
 
@@ -150,5 +152,10 @@ class EmployeeManagmentController extends Controller
         }
 
     }
-
+     public function employee(){
+        
+            $users =Auth::user()->name;
+            
+            return view('employee.home',compact('users'));
+        }
 }

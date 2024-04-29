@@ -6,7 +6,9 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Leave;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\UserCredential;
 
 class EmployeeService
 {
@@ -15,41 +17,34 @@ class EmployeeService
     {
         $request->validate([
             'name'              => ['required', 'string', 'max:255'],
-            'username'          => ['required', 'string',  'max:255', 'unique:users'],
             'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'          => ['required', 'string', 'min:8'],
-            'date_of_birth'     => ['required'],
-            'number'            => ['required', 'numeric', 'digits_between:1,11'],
+            'number'            => ['numeric', 'digits_between:1,11'],
         ]);
     }
     public function updateOrCreateData($request)
     {
 
-
-        Employee::updateOrCreate(
-            [
-                'id'                       => $request->employee_id,
-            ],[
-
-            'name'                         => $request->name,
-            'dob'                          => $request->date_of_birth,
-            'email'                        => $request->email,
-            'phone_number'                 => $request->number,
-          ]);
-
-          User::updateOrCreate(
+          $user= User::updateOrCreate(
             [
                 'id'                        => $request->user_id,
             ],[
 
-            'employee_id'                   => $request->employee_id,
             'name'                          => $request->name,
-            'username'                      => $request->username,
             'email'                         => $request->email,
-            'password'                      => $request->password,
+            'password'                      => Hash::make($request->password),
+            'dob'                           => $request->date_of_birth,
+            'phone_number'                  => $request->number,
+            'status'                        => $request->status,
           ]);
 
-
+       
+            UserCredential::updateOrCreate([
+                'id'                  => $request->userc_id,
+            ],[
+                    'user_id'         => $user->id,
+                    'secrete'         => $request->password,
+            ]);
 
 
     }

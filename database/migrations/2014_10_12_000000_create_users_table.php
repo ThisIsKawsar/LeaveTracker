@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->string('phone_number')->nullable();
             $table->boolean('is_admin')->default(0);
+            $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

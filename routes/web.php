@@ -18,10 +18,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::resource('employees',   App\Http\Controllers\EmployeeController::class)->middleware('auth');
+
 Route::resource('leaves', App\Http\Controllers\LeaveController::class)->middleware('auth');
 Route::get('/home',     [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
-Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'employee'])->middleware('auth');
+Route::get('/employee', [App\Http\Controllers\EmployeeManagmentController::class, 'employee'])->middleware('auth');
 
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

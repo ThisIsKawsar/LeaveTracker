@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Support\Facades\Hash;
+use App\Models\UserCredential;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -21,7 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin'
+        'is_admin',
+        'dob',
+        'phone_number'
     ];
 
     /**
@@ -37,7 +40,7 @@ class User extends Authenticatable
     {
         $data['name'] = $data['name'];
         $data['email'] = $data['email'];
-        $data['password'] = bcrypt($data['password']);
+        $data['password'] = Hash::make($data['password']);
         $data['is_admin'] = 0;
         return User::create($data);
     }
@@ -51,4 +54,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         
     ];
+
+    public function credential()
+    {
+        return $this->hasOne(UserCredential::class, 'user_id', 'id');
+    }
 }
