@@ -5,8 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class SendMail extends Mailable
@@ -15,43 +13,25 @@ class SendMail extends Mailable
 
     /**
      * Create a new message instance.
+     *
+     * @return void
      */
-
-     public $data;
-
+    public $data;
     public function __construct($data)
     {
-        $this->data =$data;
+       $this->data =$data;
     }
 
     /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Regarding Leave',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    { 
-        return new Content(
-            view: 'mail',
-
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
+     * Build the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return $this
      */
-    public function attachments(): array
+    public function build()
     {
-        return [];
+        return $this->view('mail',[
+            'data'=>$this->data
+        ])->subject('Regarding Leave');
+
     }
 }
