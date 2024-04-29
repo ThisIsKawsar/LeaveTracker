@@ -98,10 +98,11 @@ class LeaveRequestController extends Controller
 
                 $this->service->validateData($request);
                 $this->service->updateOrCreateData($request);
+                $this->service->SendMailData($request);
             });
 
 
-            return redirect()->route('leave-requests.index')->with('message', 'Leave Updated Successfully!');
+            return redirect()->route('leave-requests.index')->with('message', 'Leave Updated Successfully & Status Sent To Mail!');
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', $e->getMessage());

@@ -3,7 +3,9 @@
 
 namespace App\Services;
 
+use App\Mail\SendMail;
 use App\Models\Leave;
+use Illuminate\Support\Facades\Mail;
 
 class LeaveManagementService
 {
@@ -32,7 +34,18 @@ class LeaveManagementService
 
 
     }
+    public function SendMailData($request)
+    {
+      $leave            =  Leave::find($request->leave_id);
+      $email            = $leave->user->email;
+      $data['name']     = $leave->user->name;
+      $data['comments'] = $request->comments;
+      $data['status']   = $request->status;
 
+
+     Mail::to($email)->send(new SendMail($data));
+
+    }
 
 
 }
